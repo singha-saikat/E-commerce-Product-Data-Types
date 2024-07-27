@@ -16,14 +16,17 @@ const notFoundMiddleware = (req: Request, res: Response) => {
   });
 };
 
-app.use(notFoundMiddleware);
-
 // Routes
 
 app.use('/api',productsRoutes);
 
 // order routes
 app.use('/api',orderRoutes);
+
+
+app.use(notFoundMiddleware);
+
+
 
 
 app.get("/", (req: Request, res: Response) => {

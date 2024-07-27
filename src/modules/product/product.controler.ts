@@ -117,14 +117,7 @@ import { ProductService } from "./product.service";
 
   const searchProducts = async (req: Request, res: Response) => {
     try {
-      const { searchTerm } = req.query;
-      if (typeof searchTerm !== 'string') {
-        return res.status(400).json({
-          success: false,
-          message: 'Invalid search term',
-          data: null
-        });
-      }
+      const  searchTerm  = req.query.searchTerm as string;
   
       const results = await ProductService.searchProducts(searchTerm);
   
