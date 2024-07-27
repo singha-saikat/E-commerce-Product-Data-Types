@@ -23,10 +23,12 @@ app.use("/api", productsRoutes);
 // order routes
 app.use("/api", orderRoutes);
 
-app.use(notFoundMiddleware);
+
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
+
+app.use(notFoundMiddleware);
 
 export default app;
