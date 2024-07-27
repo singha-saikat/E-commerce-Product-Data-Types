@@ -21,7 +21,8 @@
     "eslint": "9.x",
     "express": "^4.19.2",
     "mongoose": "^8.4.4",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.7.0",

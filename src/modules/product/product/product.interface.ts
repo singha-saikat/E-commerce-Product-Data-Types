@@ -12,6 +12,7 @@ export type TVariant = {
   
   // Define the main Product type
   export type TProduct = {
+    // id:string,
     name: string;
     description: string;
     price: number;
