@@ -18,7 +18,7 @@ const createOrder = async (req: Request, res: Response) => {
     if (err.message === 'Insufficient stock') {
       return res.status(400).json({
         success: false,
-        message: 'Insufficient stock',
+        message: "Insufficient quantity available in inventory",
         data: null,
       });
     }
@@ -37,7 +37,7 @@ const getOrders = async (req: Request, res: Response) => {
     if (orders.length === 0) {
         return res.status(404).json({
           success: false,
-          message: `No orders found`,
+          message: 'Order not found',
           data: orders
         });
       }
