@@ -1,4 +1,4 @@
-import express, { Application, Request, Response} from "express";
+import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import { productsRoutes } from "./modules/product/product.route";
 import { orderRoutes } from "./modules/order/order.route";
@@ -12,22 +12,18 @@ app.use(cors());
 const notFoundMiddleware = (req: Request, res: Response) => {
   res.status(404).json({
     success: false,
-    message: "Route not found"
+    message: "Route not found",
   });
 };
 
 // Routes
 
-app.use('/api',productsRoutes);
+app.use("/api", productsRoutes);
 
 // order routes
-app.use('/api',orderRoutes);
-
+app.use("/api", orderRoutes);
 
 app.use(notFoundMiddleware);
-
-
-
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
