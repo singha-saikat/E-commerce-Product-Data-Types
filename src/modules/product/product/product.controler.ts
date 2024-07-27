@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { productZodValidationSchema } from "./productZod.validation";
 import { ProductService } from "./product.service";
 
-const createProduct = async (req: Request, res: Response) => {
+  const createProduct = async (req: Request, res: Response) => {
   try {
     productZodValidationSchema.parse(req.body);
     const product = await ProductService.createProduct(req.body);
@@ -23,9 +23,9 @@ const createProduct = async (req: Request, res: Response) => {
         error: err,
       });
   }
-};
+  };
 
-const getAllProducts = async (req: Request, res: Response) => {
+  const getAllProducts = async (req: Request, res: Response) => {
 
     try {
       const products = await ProductService.getAllProducts();
@@ -34,7 +34,8 @@ const getAllProducts = async (req: Request, res: Response) => {
       res.status(500).json({ success: false, message: err.message || "Products data is not found" });
     }
   };
-const getASingleProducts = async (req: Request, res: Response) => {
+
+  const getASingleProducts = async (req: Request, res: Response) => {
     try{
         const {productId }= req.params;
         const result = await ProductService.getASingleProduct(productId);
@@ -114,10 +115,42 @@ const getASingleProducts = async (req: Request, res: Response) => {
     }
   };
 
+  const searchProducts = async (req: Request, res: Response) => {
+    try {
+      const { searchTerm } = req.query;
+      if (typeof searchTerm !== 'string') {
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid search term',
+          data: null
+        });
+      }
+  
+      const results = await ProductService.searchProducts(searchTerm);
+  
+      res.status(200).json({
+        success: true,
+        message: `Products matching search term '${searchTerm}' fetched successfully!`,
+        data: results,
+      });
+    } catch (err: any) {
+      res.status(500).json({
+        success: false,
+        message: 'Error fetching products',
+        error: err.message,
+      });
+    }
+  };
+
+
+
+
+
 export const ProductControler = {
   createProduct,
   getAllProducts,
   getASingleProducts,
   deleteProduct,
-  updateProduct 
+  updateProduct,
+  searchProducts
 };

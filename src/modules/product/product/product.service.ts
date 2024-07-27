@@ -43,15 +43,22 @@ const updateProduct = async (id: string, updateData: TProduct) => {
     // Update the product
     const result = await Product.findByIdAndUpdate(objectId, updateData);
     return result;
-  };
+};
+
+const searchProducts = async (searchTerm: string) => {
+    const regex = new RegExp(searchTerm, 'i');
+    const results = await Product.find({ name: { $regex: regex } });
+    return results;
+};
 
 
-  
 
 export const ProductService = {
     createProduct,
     getAllProducts,
     getASingleProduct,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    searchProducts
+
 }
