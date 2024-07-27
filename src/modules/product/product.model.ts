@@ -8,11 +8,16 @@ const variantSchema = new Schema<TVariant>({
   });
   
   // Inventory Schema
-  const inventorySchema = new Schema<TInventory>({
-    quantity: { type: Number, required: [true, "Inventory quantity is required"] },
-    inStock: { type: Boolean, required: [true, "Inventory in-stock status is required"] },
+  const inventorySchema  = new Schema<TInventory>({
+    quantity: {
+      type: Number,
+      required: [true, "Inventory quantity is required"],
+    },
+    inStock: {
+      type: Boolean,
+      required: [true, "Inventory inStock status is required"],
+    },
   });
-  
   // Product Schema
   const productSchema = new Schema<TProduct>({
     // id:{type: String,required: [true, "Product id is required"] },
@@ -22,7 +27,10 @@ const variantSchema = new Schema<TVariant>({
     category: { type: String, required: [true, "Product category is required"] },
     tags: { type: [String], required: [true, "Product tags are required"] },
     variants: { type: [variantSchema], required: [true, "Product variants are required"] },
-    inventory: { type: inventorySchema, required: [true, "Product inventory is required"] },
+    inventory: {
+      type: inventorySchema,
+      required: [true, "Product inventory is required"],
+    },
   });
   
   const Product = model<TProduct>("Product", productSchema);

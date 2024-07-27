@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from "express";
 import { orderService } from "./order.service";
+import { TOrder } from "./order.interface";
 
 const createOrder = async (req: Request, res: Response) => {
   try {
-    const orderData = req.body;
+    const orderData : TOrder = req.body;
     const newOrder = await orderService.createOrder(orderData);
     res
       .status(201)
@@ -14,13 +15,19 @@ const createOrder = async (req: Request, res: Response) => {
         data: newOrder,
       });
   } catch (err: any) {
-    res
-      .status(500)
-      .json({
+    if (err.message === 'Insufficient stock') {
+      return res.status(400).json({
         success: false,
-        message: "Error creating order",
-        error: err.message,
+        message: 'Insufficient stock',
+        data: null,
       });
+    }
+    res.status(500).json({
+      success: false,
+      message: 'Error creating order',
+      error: err.message,
+      data: null,
+    });
   }
 };
 
