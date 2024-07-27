@@ -60,5 +60,4 @@ export const ProductService = {
     deleteProduct,
     updateProduct,
     searchProducts
-
 }
